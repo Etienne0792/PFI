@@ -2,8 +2,8 @@
 
 //----- IMPORTS -----//
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, Image, Pressable, FlatList } from 'react-native';
-import { collection, getDocs } from "firebase/firestore";
+import { StyleSheet, Text, View, Image, Pressable, ImageBackground, FlatList } from 'react-native';
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
 
 import globalStyles from '../../assets/styles/globalStyles.js';
@@ -15,22 +15,31 @@ import { LangueContext } from '../context/langue.tsx';
 
 
 //----- COMPOSANTS -----//
-//Image de l'item (si non trouver affiche une image par defaut)
-const ItemPic = (props) =>
+//Affiche l'image de l'item
+const ItemPic = (props) => 
     <View>
-        <Image style={styles.imageFormat} source={{ uri: props.uriPic || "https://www.granitz.fr/images/image-not-found.jpg" }} />
+        <Image style={styles.imageFormat} source={{uri:props.uriPic || "https://www.granitz.fr/images/image-not-found.jpg"}}/>
     </View>
 
-//Container de l'item affiche le nom et l'image
+//Affiche le nom et l'image de l'item, permet d'acceder a la page de details de l'item
 const Item = (props) => {
+    const { i18n, setLangue } = useContext(LangueContext);
     const navigation = useNavigation();
+    const purchaseDate = props.item.purchaseTime.substring(0, 10); //permet de garder seulement la date (sans l'heure)
+
     return (
-        <Pressable onPress={() => navigation.navigate('Details', { itemId: props.item.id })}>
-            <View style={styles.ItemContainer}>
-                <ItemPic uriPic={props.item.uriPic} />
-                <Text style={styles.displayName}>{props.item.nom}</Text>
-            </View>
-        </Pressable>
+        <View>
+            <Pressable onPress={() => navigation.navigate('Details', { itemId: props.item.idItem })}>
+                <View style={styles.ItemContainer}>
+                    <ItemPic uriPic={props.item.uriPic}/>
+                    <View>
+                        <Text style={styles.Detail}>Nom: {props.item.nom}</Text>        
+                        <Text style={styles.Detail}>{i18n.t('cost')}: {props.item.qty * props.item.prix}</Text>        
+                        <Text style={styles.Detail}>{i18n.t('boughtOn')}: {purchaseDate}</Text>
+                    </View>
+                </View>
+            </Pressable>
+        </View>
     );
 }
 
@@ -44,22 +53,21 @@ export default function App() {
     //Definit les items a afficher
     const [displayItems, setItemList] = useState([]);
     
-    //Recupere les items de la base de donnee
     const getItems = async () => {
-        const items = await getDocs(collection(db, "Items"))
-        const itemsData = items.docs.map((doc) => ({
+        const itemsQuery = query(collection(db, "Historique"), orderBy("purchaseTime", "desc")); // Permet de trier les items par date d'achat (du plus recent au plus ancien)
+        const itemsSnapshot = await getDocs(itemsQuery);
+        const itemsData = itemsSnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
             }));
-        setItemList(itemsData);            
+        setItemList(itemsData);
     };
 
-    //initialise l'affichage des items
-    useEffect(() => {getItems();}, []);
+    useEffect(() => {getItems();}, [displayItems]); //initialise l'affichage des items
 
     return (
         <View style={globalStyles.background}>
-            <Header nom={i18n.t('Tools')} />
+            <Header nom={i18n.t('cost')} />
             <View style={styles.ItemList}>
                 <FlatList
                     data={displayItems}
@@ -94,9 +102,14 @@ const styles = StyleSheet.create({
         width: 90,
         height: 90,
         margin: 15,
+        
         objectFit: 'contain',
     },
     ItemList: {
         flex: 1
     },
+    Detail:{
+        fontSize:20,
+         padding:2
+    }
 });
