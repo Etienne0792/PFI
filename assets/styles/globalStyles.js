@@ -19,6 +19,24 @@ const globalStyles = StyleSheet.create({
         width: "100%",
         backgroundColor: "#fcf1f0",
     },
+    imageFormat: {
+        width: 90,
+        height: 90,
+        margin: 15,
+        objectFit: 'contain',
+    },
+    ItemContainer: {
+        flexDirection: "row",
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        borderRadius: 10,
+        borderWidth: 2,
+        margin: 15,
+        backgroundColor: "#F3F3F3",
+    },
+    ItemList: {
+        flex: 1
+    },
 });
 
 

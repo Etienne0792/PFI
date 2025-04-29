@@ -7,13 +7,15 @@ const Header = (props) => {
     const { langue, setLangue } = useContext(LangueContext);
 
     const changeLanguage = () => {
-        console.log("langue : " + langue);
         if (langue === 'fr-CA') {
             setLangue('en-US');
         }   
         else if (langue === 'en-US') {
             setLangue('fr-CA');
-        }       
+        }     
+        else{
+            setLangue('fr-CA');
+        }  
     };
 
     return (

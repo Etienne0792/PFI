@@ -50,7 +50,6 @@ export const LangueProvider = ({ children }) => {
 
     const i18n = new I18n(translations);
     i18n.locale = langue;
-    console.log("Langue actuelle : ", langue);
 
     const value = { i18n, setLangue, langue };
 

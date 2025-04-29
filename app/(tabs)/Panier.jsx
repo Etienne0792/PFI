@@ -11,7 +11,6 @@ import {
     Pressable,
     TextInput,
     ToastAndroid,
-    ImageBackground,
 } from 'react-native';
 import { collection, getDocs, deleteDoc, doc, addDoc, updateDoc, query, where } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
@@ -27,7 +26,7 @@ import { LangueContext } from '../context/langue.jsx';
 //Image de l'item (si non trouver affiche une image par defaut)
 const ItemPic = (props) =>
     <View>
-        <Image style={styles.imageFormat} source={{ uri: props.uriPic || "https://www.granitz.fr/images/image-not-found.jpg" }} />
+        <Image style={globalStyles.imageFormat} source={{ uri: props.uriPic || "https://www.granitz.fr/images/image-not-found.jpg" }} />
     </View>
 
 //Affiche la barre de prix total et le bouton d'achat pour tous les items du panier
@@ -97,7 +96,7 @@ const Item = (props) => {
     return (
         <View>
             <Pressable onPress={() => navigation.navigate('Details', { itemId: props.item.idItem })}>
-                <View style={styles.ItemContainer}>
+                <View style={globalStyles.ItemContainer}>
                     <ItemPic uriPic={props.item.uriPic} />
                     <View style={styles.Detail}>
                         <Text style={styles.Detail}>Nom: {String(props.item.nom)}</Text>
@@ -196,7 +195,7 @@ export default function App() {
     return (
         <View style={globalStyles.background}>
             <Header nom={i18n.t('Panier')} />
-            <View style={styles.ItemList}>
+            <View style={globalStyles.ItemList}>
                 <FlatList
                     data={displayItems}
                     renderItem={({item}) => <Item item={item} />}
@@ -275,25 +274,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     Detail:{
-        fontSize: 20,
+        fontSize: 17,
         textAlign: 'left',
-    },
-    ItemContainer: {
-        flexDirection: "row",
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        borderRadius: 10,
-        borderWidth: 2,
-        margin: 15,
-        backgroundColor: "#F3F3F3",
-    },
-    imageFormat: {
-        width: 90,
-        height: 90,
-        margin: 15,
-        objectFit: 'contain',
-    },
-    ItemList: {
-        flex: 1
     },
 });

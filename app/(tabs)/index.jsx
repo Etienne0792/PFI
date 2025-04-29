@@ -18,7 +18,7 @@ import { LangueContext } from '../context/langue.jsx';
 //Image de l'item (si non trouver affiche une image par defaut)
 const ItemPic = (props) =>
     <View>
-        <Image style={styles.imageFormat} source={{ uri: props.uriPic || "https://www.granitz.fr/images/image-not-found.jpg" }} />
+        <Image style={globalStyles.imageFormat} source={{ uri: props.uriPic || "https://www.granitz.fr/images/image-not-found.jpg" }} />
     </View>
 
 //Container de l'item affiche le nom et l'image
@@ -26,7 +26,7 @@ const Item = (props) => {
     const navigation = useNavigation();
     return (
         <Pressable onPress={() => navigation.navigate('Details', { itemId: props.item.id })}>
-            <View style={styles.ItemContainer}>
+            <View style={globalStyles.ItemContainer}>
                 <ItemPic uriPic={props.item.uriPic} />
                 <Text style={styles.displayName}>{props.item.nom}</Text>
             </View>
@@ -60,7 +60,7 @@ export default function App() {
     return (
         <View style={globalStyles.background}>
             <Header nom={i18n.t('Tools')} />
-            <View style={styles.ItemList}>
+            <View style={globalStyles.ItemList}>
                 <FlatList
                     data={displayItems}
                     renderItem={({item}) => <Item item={item} />}
@@ -77,26 +77,8 @@ export default function App() {
 
 //----- STYLES -----//
 const styles = StyleSheet.create({
-    ItemContainer: {
-        flexDirection: "row",
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        borderRadius: 10,
-        borderWidth: 2,
-        margin: 15,
-        backgroundColor: "#F3F3F3",
-    },
     displayName: {
         fontSize: 20,
         padding: 10
-    },
-    imageFormat: {
-        width: 90,
-        height: 90,
-        margin: 15,
-        objectFit: 'contain',
-    },
-    ItemList: {
-        flex: 1
     },
 });
