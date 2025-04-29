@@ -10,7 +10,7 @@ const Header = (props) => {
     const { langue, setLangue } = useContext(LangueContext);
     const { userId, setUserId, userName } = useContext(UserContext);
 
-
+    //Permet de changer la langue de l'application
     const changeLanguage = () => {
         if (langue === 'fr-CA') {
             setLangue('en-US');
@@ -23,9 +23,10 @@ const Header = (props) => {
         }  
     };
 
+    //permet de deconnecter l'utilisateur
     const deconnexion = () => {
         setUserId('');
-        navigation.navigate("Panier")
+        navigation.navigate("Panier");
         console.log("Deconnexion de l'utilisateur: " + userId);
     };
 

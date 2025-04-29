@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
     const [userId, setUserId] = useState("");
     const [userName, setUserName] = useState(null);
     
-
+    //Permet de recuperer el nom de l'utilisateur
     const getUserName = async () => {
         const db = getFirestore(app);
         const userDocRef = doc(db, 'users', userId);
@@ -22,6 +22,7 @@ export const UserProvider = ({ children }) => {
         }
     }  
 
+    //met le nom d'utilisateur a jour
     useEffect(() => {getUserName();}, [userId]);
 
     const value = { userId, setUserId, userName };
