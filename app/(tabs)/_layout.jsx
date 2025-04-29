@@ -31,7 +31,6 @@ export default function TabLayout() {
                     options={{
                         title: i18n.t('Tools'),
                         tabBarIcon: ({ color }) => <AntDesign name="appstore-o" size={24} color="black" />,
-                        headerStyle: { backgroundColor: 'lightblue' },
                     }}
                 />
 
@@ -40,7 +39,6 @@ export default function TabLayout() {
                     options={{
                         title: i18n.t('Panier'),
                         tabBarIcon: ({ color }) => <AntDesign name="shoppingcart" size={24} color="black" />,
-                        headerStyle: { backgroundColor: 'lightblue' },
                     }}
                 />
 
@@ -49,7 +47,6 @@ export default function TabLayout() {
                     options={{
                         title: i18n.t('History'),
                         tabBarIcon: ({ color }) => <AntDesign name="clockcircleo" size={24} color="black" />,
-                        headerStyle: { backgroundColor: 'lightblue' },
                     }}
                 />
 
@@ -58,7 +55,6 @@ export default function TabLayout() {
                     options={{
                         title: i18n.t('Localisation'),
                         tabBarIcon: ({ color }) => <Feather name="map" size={24} color="black" />,
-                        headerStyle: { backgroundColor: 'lightblue' },
                     }}
                 />
 

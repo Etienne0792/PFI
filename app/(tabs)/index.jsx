@@ -1,5 +1,7 @@
 //Étienne La Rochelle
 
+
+
 //----- IMPORTS -----//
 import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, FlatList } from 'react-native';
