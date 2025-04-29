@@ -20,7 +20,7 @@ import db from '../firebaseConfig';
 import Header from '../../component/header.js';
 import globalStyles from '@/assets/styles/globalStyles';
 
-import { LangueContext } from '../context/langue.tsx';
+import { LangueContext } from '../context/langue.jsx';
 
 
 //----- COMPOSANTS -----//

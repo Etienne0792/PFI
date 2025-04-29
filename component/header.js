@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
-import { LangueContext } from '../app/context/langue.tsx';
+import { LangueContext } from '../app/context/langue.jsx';
 
 const Header = (props) => {
     const { langue, setLangue } = useContext(LangueContext);

@@ -10,7 +10,7 @@ import globalStyles from '../../assets/styles/globalStyles.js';
 import db from '../firebaseConfig';
 import Header from '../../component/header.js';
 
-import { LangueContext } from '../context/langue.tsx';
+import { LangueContext } from '../context/langue.jsx';
 
 
 

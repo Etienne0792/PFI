@@ -6,7 +6,7 @@ import { Platform, StatusBar } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Feather from '@expo/vector-icons/Feather';
 
-import { LangueContext } from '../context/langue.tsx';
+import { LangueContext } from '../context/langue.jsx';
 
 export default function TabLayout() {
     const { i18n, setLangue } = useContext(LangueContext);
