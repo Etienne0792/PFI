@@ -69,7 +69,7 @@ const Item = (props) => {
         try{
             await addDoc(collection(db, "Historique"), { //ajoute l'item dans l'historique
                 idUser: 1,
-                itemId: props.item.idItem,
+                iditem: props.item.idItem,
                 nom: props.item.nom,
                 uriPic: props.item.uriPic,
                 description: props.item.description,

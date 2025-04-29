@@ -48,7 +48,7 @@ const Item = (props) => {
 //----- PAGE PRINCIPALE -----//
 export default function App() {
     //Translation
-    const { i18n, setLangue } = useContext(LangueContext);
+    const { i18n } = useContext(LangueContext);
 
     //Definit les items a afficher
     const [displayItems, setItemList] = useState([]);
