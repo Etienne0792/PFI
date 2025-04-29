@@ -5,11 +5,22 @@ import { LangueContext } from '../app/context/langue.tsx';
 
 const Header = (props) => {
     const { langue, setLangue } = useContext(LangueContext);
+
+    const changeLanguage = () => {
+        console.log("langue : " + langue);
+        if (langue === 'fr-CA') {
+            setLangue('en-US');
+        }   
+        else if (langue === 'en-US') {
+            setLangue('fr-CA');
+        }       
+    };
+
     return (
         <View style={styles.header}>
             <Text style={styles.title}>{props.nom}</Text>
-            <Pressable style={styles.button} onPress={() => setLangue(langue === 'fr-CA' ? 'en-US' : 'fr-CA')}>
-                <Text>TEST</Text>
+            <Pressable style={styles.button} onPress={changeLanguage}>
+                <Text>{langue.substring(0,2).toUpperCase()}</Text>
             </Pressable>
         </View>
     );
@@ -32,11 +43,14 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     button: {
+        position: 'absolute',
         backgroundColor: "#F3F3F3",
         borderRadius: 5,
         padding: 10,
-        margin: 10,
-        marginLeft: 'auto',
+        margin: 20,
+        width: 40,
+        right: 0,
+        alignItems: 'center',
     }
 });
 

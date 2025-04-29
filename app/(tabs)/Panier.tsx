@@ -46,7 +46,7 @@ const TotalPriceBar = ({ totalPrice, onBuyAllPress }) => {
 
 //Container de l'item affiche le nom et l'image, contient egalement les inputs necessaire a l'achat et a la suppression de l'item
 const Item = (props) => {
-    const { i18n, setLangue } = useContext(LangueContext);
+    const { i18n } = useContext(LangueContext);
     const navigation = useNavigation();
     const [removeQty, setRemoveQty] = useState(1); //definie la quantite d'item a acheter ou supprimer
 
@@ -139,6 +139,7 @@ const Item = (props) => {
 
 //----- PAGE PRINCIPALE -----//
 export default function App() {
+    const { i18n } = useContext(LangueContext);
     const [totalPrice, setTotalPrice] = useState(0); // initialize total price to 0
     const [displayItems, setItemList] = useState([]); // initialise les items a afficher
 
@@ -194,7 +195,7 @@ export default function App() {
 
     return (
         <View style={globalStyles.background}>
-            <Header nom="Panier" />
+            <Header nom={i18n.t('Panier')} />
             <View style={styles.ItemList}>
                 <FlatList
                     data={displayItems}

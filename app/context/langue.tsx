@@ -42,7 +42,6 @@ const translations = {
 // Create the context
 export const LangueContext = createContext({
     i18n: new I18n(translations),
-    setLangue: (lang: string) => { }
 });
 
 // Create the provider
@@ -51,9 +50,9 @@ export const LangueProvider = ({ children }) => {
 
     const i18n = new I18n(translations);
     i18n.locale = langue;
+    console.log("Langue actuelle : ", langue);
 
-
-    const value = { i18n, setLangue };
+    const value = { i18n, setLangue, langue };
 
     return (
         <LangueContext.Provider value={value}>
