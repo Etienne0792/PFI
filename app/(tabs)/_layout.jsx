@@ -9,7 +9,7 @@ import Feather from '@expo/vector-icons/Feather';
 import { LangueContext } from '../context/langue.jsx';
 
 export default function TabLayout() {
-    const { i18n, setLangue } = useContext(LangueContext);
+    const { i18n } = useContext(LangueContext);
     
     return (
         <>
