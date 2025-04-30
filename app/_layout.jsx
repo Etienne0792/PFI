@@ -28,6 +28,10 @@ export default function RootLayout() {
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 <Stack.Screen name="Details" options={{ headerShown: false }} />
                 <Stack.Screen name="+not-found" />
+                <Stack.Screen name="screens/apropos" options={{ headerShown: false }} />
+                <Stack.Screen name="Connexion" options={{ headerShown: false }} />
+                <Stack.Screen name="Admin" options={{ headerShown: false }} />
+                <Stack.Screen name="Inscription" options={{ headerShown: false }} />
             </Stack>  
         </UserProvider>
     </LangueProvider>
