@@ -1,6 +1,7 @@
 [
-    {"id": 10, "coord": {"latitude": 45.5585974, "longitude": -73.8944696}, "nom": "Les 3 Galo Pains"},
-    {"id": 20, "coord": {"latitude": 45.603508197374346, "longitude": -73.78834001744862}, "nom": "C'Tiguou Boulangerie Pâtisserie"},
-    {"id": 30, "coord": {"latitude": 45.61758539673886, "longitude": -73.8156015847305}, "nom": "Boulangerie Le Marquis"},
-    {"id": 40, "coord": {"latitude": 45.56769697492668, "longitude": -73.74387973779393}, "nom": "Boulangerie Première Moisson - Laval"},
+    {"id": 1, "coord": {"latitude":  45.6235861783292, "longitude": -73.91079556044801}, "nom": "L'entrepôt RONA Saint-Eustache"},
+    {"id": 2, "coord": {"latitude": 45.57439981237425, "longitude": -73.72414144388001}, "nom": "RONA+ Laval"},
+    {"id": 3, "coord": {"latitude": 45.47859871650823, "longitude": -73.81721452580146}, "nom": "The Home Depot"},
+    {"id": 4, "coord": {"latitude": 45.618580270789366, "longitude": -73.7412596135951}, "nom": "FGL tools Service"},
+    {"id": 5, "coord": {"latitude": 45.65816000729941, "longitude": -73.83688741516848}, "nom": "Collège Lionel-Groulx"},
   ]

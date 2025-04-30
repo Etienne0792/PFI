@@ -3,22 +3,21 @@
 
 //----- IMPORTS -----//
 import React, { useRef } from 'react';
-import { StyleSheet, View, Text, FlatList, Pressable, Platform } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Pressable, Image } from 'react-native';
 import MapView, { PROVIDER_DEFAULT, Marker } from 'react-native-maps';
 
 import Header from '../../component/header.js';
 import locations from '../entrepot.json';
 
 
-
 //----- PAGE PRINCIPALE -----//
 export default function App() {
     //definit l'emplacement de debut
     const initialRegion = {
-        latitude: 45.6428144,
-        longitude: -73.8453732,
-        latitudeDelta: 0.1,
-        longitudeDelta: 0.1,
+        latitude: 45.590665,
+        longitude: -73.8380597,
+        latitudeDelta: 0.5,
+        longitudeDelta: 0.5,
     };
 
     const mapRef = useRef(null);
@@ -26,7 +25,7 @@ export default function App() {
     //deplace la carte sur la position de l'item selectionne
     const ItemPress = (id) => {
         const selectedLocation = locations.find((item) => item.id === id);
-        if(mapRef.current && selectedLocation) {
+        if (mapRef.current && selectedLocation) {
             mapRef.current.animateToRegion({
                 latitude: selectedLocation.coord.latitude,
                 longitude: selectedLocation.coord.longitude,
@@ -47,7 +46,7 @@ export default function App() {
 
     return (
         <View style={styles.background}>
-            <Header nom="Localisation"/>
+            <Header nom="Localisation" />
             <View style={styles.map}>
                 <MapView
                     ref={mapRef}
@@ -61,7 +60,14 @@ export default function App() {
                             title={item.nom}
                             coordinate={item.coord}
                             onPress={() => ItemPress(item.id)}
-                        />
+                        //icon={item.id === 5 ? require('../../assets/images/house.png') : require('../../assets/images/warehouse.png')}
+                        >
+                            <Image
+                                source={item.id === 5 ? require('../../assets/images/house.png') : require('../../assets/images/warehouse.png')}
+                                style={item.id === 5 ? { width: 50, height: 50 }: { width: 30, height: 30 }}
+                                resizeMode="contain"
+                            />
+                        </Marker>
                     ))}
                 </MapView>
             </View>
@@ -80,7 +86,7 @@ export default function App() {
 
 //----- STYLES -----//
 const styles = StyleSheet.create({
-    background:{
+    background: {
         flex: 1,
         backgroundColor: '#0955ad',
     },
