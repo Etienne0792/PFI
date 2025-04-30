@@ -60,7 +60,6 @@ export default function App() {
                             title={item.nom}
                             coordinate={item.coord}
                             onPress={() => ItemPress(item.id)}
-                        //icon={item.id === 5 ? require('../../assets/images/house.png') : require('../../assets/images/warehouse.png')}
                         >
                             <Image
                                 source={item.id === 5 ? require('../../assets/images/house.png') : require('../../assets/images/warehouse.png')}
