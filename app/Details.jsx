@@ -7,10 +7,8 @@ import {
     Text,
     View,
     Image,
-    Button,
     Pressable,
     TextInput,
-    ToastAndroid,
     KeyboardAvoidingView,
     ScrollView,
 } from 'react-native';
@@ -55,9 +53,9 @@ const Item = (props) => {
                 qty: quantity,
                 prix: props.prix,
             });
-            ToastAndroid.show("Item ajouté au panier", ToastAndroid.SHORT);
+            Alert.alert("Item ajouté au panier");
         } catch (e) {
-            ToastAndroid.show("L'item na pus être ajouté au panier", ToastAndroid.SHORT);
+            Alert.alert("L'item na pus être ajouté au panier");
         }
     };
 
