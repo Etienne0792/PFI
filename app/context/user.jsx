@@ -1,6 +1,8 @@
+//Étienne La Rochelle
+
 import React, { createContext, useState, useEffect } from 'react';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import { app } from '../firebaseConfig'; // Assuming your firebase config is exported from here
+import { app } from '../firebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 
 export const UserContext = createContext();

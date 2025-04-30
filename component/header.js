@@ -1,3 +1,4 @@
+//Étienne La Rochelle
 
 import React, { useContext } from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
@@ -38,12 +39,14 @@ const Header = (props) => {
                     <Text>{langue.substring(0,2).toUpperCase()}</Text>
                 </Pressable>
             </View>
-            <View style={styles.userSection}>
-                <Text>{userName}</Text>
-                <Pressable onPress={deconnexion}>
-                    <Text style={styles.deconexionText}>Deconnecter</Text>
-                </Pressable>
-            </View>
+            {userId !== '' && ( // Permet de ne montrer le nom de l'utilisateur que si il est connecté
+                <View style={styles.userSection}>
+                    <Text>{userName}</Text>
+                    <Pressable onPress={deconnexion}>
+                        <Text style={styles.deconexionText}>Deconnecter</Text>
+                    </Pressable>
+                </View>
+            )} 
         </View>
     );
 }

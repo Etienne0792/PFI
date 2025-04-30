@@ -1,7 +1,7 @@
 //Étienne La Rochelle
 
 //----- IMPORTS -----//
-import React, { useCallback, useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
     StyleSheet,
     Text,
@@ -11,6 +11,8 @@ import {
     Pressable,
     TextInput,
     ToastAndroid,
+    Platform,
+    Alert,
 } from 'react-native';
 import { collection, getDocs, deleteDoc, doc, addDoc, updateDoc, query, where } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
@@ -31,12 +33,12 @@ const ItemPic = (props) =>
 
 //Affiche la barre de prix total et le bouton d'achat pour tous les items du panier
 const TotalPriceBar = ({ totalPrice, onBuyAllPress }) => {
-    const { i18n, setLangue } = useContext(LangueContext);
+    const { i18n } = useContext(LangueContext);
     return (
         <View style={styles.totalPriceBar}>
             <Text style={styles.totalPriceText}>Total: ${totalPrice.toFixed(2)}</Text>
-            <Pressable style={styles.buyAllButton} onPress={onBuyAllPress}>
-                <Text style={styles.buyAllButtonText}>{i18n.t('buyAll')}:</Text>
+            <Pressable style={globalStyles.BiggerButton} onPress={onBuyAllPress}>
+                <Text style={globalStyles.BiggerButtonText}>{i18n.t('buyAll')}:</Text>
             </Pressable>
         </View>
     );
@@ -48,18 +50,6 @@ const Item = (props) => {
     const { i18n } = useContext(LangueContext);
     const navigation = useNavigation();
     const [removeQty, setRemoveQty] = useState(1); //definie la quantite d'item a acheter ou supprimer
-
-    //Permet de retirer une quantite de l'item du panier
-    const handleDelete = async () => {
-        const qtyToRemove = Math.min(removeQty, props.item.qty);
-        if (qtyToRemove === props.item.qty) { //supprime l'item si la quantite - la quantitie a enlever = 0
-            await deleteDoc(doc(db, "Paniers", props.item.id));
-        } else { //sinon on met a jour la quantite de l'item dans le panier
-            await updateDoc(doc(db, "Paniers", props.item.id), {
-                qty: props.item.qty - qtyToRemove
-            });
-        }
-    };
     
     //Permet d'acheter un item du panier
     const buyItem = async () => {
@@ -77,9 +67,9 @@ const Item = (props) => {
                 purchaseTime: purchaseTime,
             });
             await handleDelete(); //supprime l'item du panier
-            ToastAndroid.show("Votre commande a été effectué!", ToastAndroid.SHORT);
+            Alert.alert("Votre commande a été effectué!");
         }catch (error) {
-            ToastAndroid.show("La commande n'a pas pu être effectué", ToastAndroid.SHORT);
+            Alert.alert("La commande n'a pas pu être effectué");
         }
     };
 
@@ -87,9 +77,9 @@ const Item = (props) => {
     const DeleteItem = async () => {
         try{
             await handleDelete(); // supprime l'item du panier
-            ToastAndroid.show("Item supprimer", ToastAndroid.SHORT);
+            Alert.alert("Item supprimer");
         }catch (error) {
-            ToastAndroid.show("l'item n'a pas pus être supprimer", ToastAndroid.SHORT);
+            Alert.alert("l'item n'a pas pus être supprimer");
         }
     };
 
@@ -172,7 +162,7 @@ export default function App() {
                 ...doc.data()
             }));
             if (itemData.length === 0) { //verifie si le panier est vide
-                ToastAndroid.show("Aucun item dans le panier", ToastAndroid.SHORT);
+                Alert.alert("Aucun item dans le panier");
                 return;
             }
             for (const dessert of itemData) {
@@ -183,9 +173,9 @@ export default function App() {
                 await addDoc(collection(db, "Historique"), itemWithTime); //ajoute l'item dans l'historique
                 await deleteDoc(doc(db, "Paniers", dessert.id)); //supprime l'item du panier
             }
-            ToastAndroid.show("Votre commande a été placer", ToastAndroid.SHORT);
+            Alert.alert("Votre commande a été placer");
         } catch (error) {
-            console.error("Error moving items to Historique:", error);
+            Alert.alert("Erreur lors de la commande");
         }
     };
 

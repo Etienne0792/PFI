@@ -11,7 +11,6 @@ import {
     Pressable,
     TextInput,
     ToastAndroid,
-    ImageBackground,
     KeyboardAvoidingView,
     ScrollView,
 } from 'react-native';
@@ -94,11 +93,9 @@ const Item = (props) => {
                             />   
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button
-                                title={i18n.t('addToCart')}
-                                onPress={addToCart}
-                                color="#119c16"
-                            />
+                            <Pressable style={globalStyles.BiggerButton} onPress={addToCart}>
+                                <Text style={globalStyles.BiggerButtonText}>{i18n.t('addToCart')}</Text>
+                            </Pressable>
                         </View>
                     </View>
                 </View>
@@ -247,5 +244,5 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
 });

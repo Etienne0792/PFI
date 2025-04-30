@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Platform, StatusBar } from 'react-native';
 
 // See MaterialIcons here: https://icons.expo.fyi
@@ -19,7 +19,6 @@ export default function TabLayout() {
                     headerShown: false,
                     tabBarStyle: Platform.select({
                         ios: {
-                            // Use a transparent background on iOS to show the blur effect
                             position: 'absolute',
                         },
                         default: {},

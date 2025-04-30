@@ -2,9 +2,9 @@
 
 
 //----- IMPORTS -----//
-import React, { useState, useRef, useContext } from 'react';
-import { StyleSheet, View, Text, FlatList, Pressable } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import React, { useRef } from 'react';
+import { StyleSheet, View, Text, FlatList, Pressable, Platform } from 'react-native';
+import MapView, { PROVIDER_DEFAULT, Marker } from 'react-native-maps';
 
 import Header from '../../component/header.js';
 import locations from '../entrepot.json';
@@ -52,7 +52,7 @@ export default function App() {
                 <MapView
                     ref={mapRef}
                     style={{ flex: 1 }}
-                    provider={PROVIDER_GOOGLE}
+                    provider={PROVIDER_DEFAULT}
                     initialRegion={initialRegion}
                 >
                     {locations.map((item) => (

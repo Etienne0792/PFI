@@ -37,6 +37,18 @@ const globalStyles = StyleSheet.create({
     ItemList: {
         flex: 1
     },
+    BiggerButton: {
+        backgroundColor: 'green',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    BiggerButtonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+    },
 });
 
 
