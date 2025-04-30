@@ -10,11 +10,9 @@ import {
     FlatList,
     Pressable,
     TextInput,
-    ToastAndroid,
-    Platform,
     Alert,
 } from 'react-native';
-import { collection, getDocs, deleteDoc, doc, addDoc, updateDoc, query, where } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, addDoc, Timestamp, query, where } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
 
 import db from '../firebaseConfig';
@@ -50,36 +48,38 @@ const Item = (props) => {
     const { i18n } = useContext(LangueContext);
     const navigation = useNavigation();
     const [removeQty, setRemoveQty] = useState(1); //definie la quantite d'item a acheter ou supprimer
-    
+
     //Permet d'acheter un item du panier
     const buyItem = async () => {
-        const now = new Date(); //trouve la date d'aujourd'hui
-        const purchaseTime = `${now.getFullYear()}-${(now.getMonth() + 1).toString()}-${now.getDate().toString()} ${now.getHours().toString()}:${now.getMinutes().toString()}:${now.getSeconds().toString()}`;
+        // No need to manually format the date string anymore
+        // const now = new Date();
+        // const purchaseTime = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-...`;
+
         try{
             await addDoc(collection(db, "Historique"), { //ajoute l'item dans l'historique
-                idUser: 1,
+                idUser: 1, // Consider making this dynamic
                 iditem: props.item.idItem,
                 nom: props.item.nom,
                 uriPic: props.item.uriPic,
                 description: props.item.description,
                 qty: removeQty,
                 prix: props.item.prix,
-                purchaseTime: purchaseTime,
+                purchaseTime: Timestamp.now(), // <-- Use Firestore Timestamp here
             });
-            await handleDelete(); //supprime l'item du panier
-            Alert.alert("Votre commande a été effectué!");
+            await deleteDoc(doc(db, "Paniers", props.item.id));
+            Alert.alert(i18n.t('buyOne'));
         }catch (error) {
-            Alert.alert("La commande n'a pas pu être effectué");
+            Alert.alert(i18n.t('buyOneError'));
         }
     };
 
     //Permet de supprimer un item du panier et de notifier l'usager
     const DeleteItem = async () => {
         try{
-            await handleDelete(); // supprime l'item du panier
-            Alert.alert("Item supprimer");
+            await deleteDoc(doc(db, "Paniers", props.item.id));
+            Alert.alert(i18n.t('deleteItem'));
         }catch (error) {
-            Alert.alert("l'item n'a pas pus être supprimer");
+            Alert.alert(i18n.t('deleteItemError'));
         }
     };
 
@@ -166,10 +166,8 @@ export default function App() {
                 return;
             }
             for (const dessert of itemData) {
-                const now = new Date();
-                const purchaseTime = `${now.getFullYear()}-${(now.getMonth() + 1).toString()}-${now.getDate().toString()} ${now.getHours().toString()}:${now.getMinutes().toString()}:${now.getSeconds().toString()}`;
                 const { id, ...itemInfo } = dessert; //copie les valeurs de dessert dans dessertInfo
-                const itemWithTime = { ...itemInfo, purchaseTime: purchaseTime }; //ajouter la date d'achat a itemInfo
+                const itemWithTime = { ...itemInfo, purchaseTime: Timestamp.now(), }; //ajouter la date d'achat a itemInfo
                 await addDoc(collection(db, "Historique"), itemWithTime); //ajoute l'item dans l'historique
                 await deleteDoc(doc(db, "Paniers", dessert.id)); //supprime l'item du panier
             }

@@ -142,7 +142,7 @@ export default function App() {
     if (loading) {
         return (
             <View style={globalStyles.background}>
-                <Header nom={i18n.t('Title')} />
+                <Header nom={i18n.t('loading')} />
                 <View style={styles.loadingContainer}>
                     <Text style={styles.loadingText}>{i18n.t('loading')}</Text>
                 </View>
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 10,
         left: 10,
-        backgroundColor: '#063c7a',
+        backgroundColor: '#c42116',
         paddingHorizontal: 30,
         borderRadius: 5,
         padding: 5,

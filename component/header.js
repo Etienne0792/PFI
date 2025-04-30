@@ -36,7 +36,7 @@ const Header = (props) => {
             <View style={styles.titleSection}>
                 <Text style={styles.title}>{props.nom}</Text>
                 <Pressable style={styles.languageButton} onPress={changeLanguage}>
-                    <Text>{langue.substring(0,2).toUpperCase()}</Text>
+                    <Text>{langue.substring(0,2).toUpperCase() == 'FR' ? 'EN' : 'FR'}</Text>
                 </Pressable>
             </View>
             {userId !== '' && ( // Permet de ne montrer le nom de l'utilisateur que si il est connecté

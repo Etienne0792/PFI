@@ -18,7 +18,7 @@ const translations = {
         addToCart:"Ajouter au panier",
         cost:"Coût",
         boughtOn:"Date d'achat",
-        buyOne:"Acheter",
+        buyOne:"Item Acheter",
         delete:"Supprimer",
         buyAll:"Acheter tout",
         accueil:"Accueil",
@@ -30,6 +30,9 @@ const translations = {
         userFile:"Entrez votre nom :",
         passwordFile:"Entrez votre mot de passe :",
         admin:"Administrateur",
+        deleteItem:"Item Supprimer",
+        buyOneError:"Erreur l'item n'a pas pu être acheter",
+        deleteItemError:"Erreur l'item n'a pas pu être supprimer",
     },
     "en-US": {
         Tools: "Tools",
@@ -43,7 +46,7 @@ const translations = {
         addToCart:"Add top cart",
         cost:"Cost",
         boughtOn:"bought on",
-        buyOne:"Buy",
+        buyOne:"Item Bought",
         delete:"Delete",
         buyAll:"Buy all",
         accueil:"Welcome",
@@ -55,6 +58,9 @@ const translations = {
         userFile:"Enter your name :",
         passwordFile:"Enter your password :",
         admin:"Administrator",
+        deleteItem:"Item Deleted",
+        buyOneError:"Error the item could not be bought",
+        deleteItemError:"Error the item could not be deleted",
     },
 
 

@@ -27,8 +27,7 @@ const ItemPic = (props) =>
 const Item = (props) => {
     const { i18n } = useContext(LangueContext);
     const navigation = useNavigation();
-    const purchaseDate = props.item.purchaseTime.substring(0, 10); //permet de garder seulement la date (sans l'heure)
-
+    const purchaseDate = props.item.purchaseTime.toDate(); //permet de garder seulement la date (sans l'heure);
     return (
         <View>
             <Pressable onPress={() => navigation.navigate('Details', { itemId: props.item.idItem })}>
@@ -37,7 +36,7 @@ const Item = (props) => {
                     <View>
                         <Text style={styles.Detail}>Nom: {props.item.nom}</Text>        
                         <Text style={styles.Detail}>{i18n.t('cost')}: {props.item.qty * props.item.prix}</Text>        
-                        <Text style={styles.Detail}>{i18n.t('boughtOn')}: {purchaseDate}</Text>
+                        <Text style={styles.Detail}>{i18n.t('boughtOn')}: { purchaseDate.toLocaleDateString(i18n.language, { year: 'numeric', month: '2-digit', day: '2-digit' })}</Text>
                     </View>
                 </View>
             </Pressable>
@@ -65,7 +64,7 @@ export default function App() {
         setItemList(itemsData);
     };
 
-    useEffect(() => {getItems();}, [displayItems]); //initialise l'affichage des items
+    useEffect(() => {getItems();}, [getItems()]); //initialise l'affichage des items
 
     return (
         <View style={globalStyles.background}>
