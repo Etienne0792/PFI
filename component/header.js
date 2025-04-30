@@ -3,10 +3,10 @@ import React, { useContext } from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { LangueContext } from '../app/context/langue.jsx';
 import { UserContext } from '../app/context/user.jsx';
-import { useNavigation } from 'expo-router';
+import { useRouter} from 'expo-router';
 
 const Header = (props) => {
-    const navigation = useNavigation();
+    const router = useRouter();
     const { langue, setLangue } = useContext(LangueContext);
     const { userId, setUserId, userName } = useContext(UserContext);
 
@@ -26,7 +26,7 @@ const Header = (props) => {
     //permet de deconnecter l'utilisateur
     const deconnexion = () => {
         setUserId('');
-        navigation.navigate("Panier");
+        router.replace('/Panier') // <-- permet de rediriger vers login meme depuis details qui n'est pas dans (tabs)
         console.log("Deconnexion de l'utilisateur: " + userId);
     };
 
