@@ -20,6 +20,7 @@ import Header from '../../component/header.js';
 import globalStyles from '@/assets/styles/globalStyles';
 
 import { LangueContext } from '../context/langue.jsx';
+import { UserContext } from '../context/user.jsx';
 
 
 //----- COMPOSANTS -----//
@@ -51,24 +52,22 @@ const Item = (props) => {
 
     //Permet d'acheter un item du panier
     const buyItem = async () => {
-        // No need to manually format the date string anymore
-        // const now = new Date();
-        // const purchaseTime = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-...`;
-
         try{
+            console.log(props.userId)
             await addDoc(collection(db, "Historique"), { //ajoute l'item dans l'historique
-                idUser: 1, // Consider making this dynamic
+                idUser: props.userId,
                 iditem: props.item.idItem,
                 nom: props.item.nom,
                 uriPic: props.item.uriPic,
                 description: props.item.description,
                 qty: removeQty,
                 prix: props.item.prix,
-                purchaseTime: Timestamp.now(), // <-- Use Firestore Timestamp here
+                purchaseTime: Timestamp.now(),
             });
-            await deleteDoc(doc(db, "Paniers", props.item.id));
+            await deleteDoc(doc(db, "Paniers", props.item.id)); //supprime l'item du panier
             Alert.alert(i18n.t('buyOne'));
         }catch (error) {
+            console.log(error);
             Alert.alert(i18n.t('buyOneError'));
         }
     };
@@ -76,7 +75,7 @@ const Item = (props) => {
     //Permet de supprimer un item du panier et de notifier l'usager
     const DeleteItem = async () => {
         try{
-            await deleteDoc(doc(db, "Paniers", props.item.id));
+            await deleteDoc(doc(db, "Paniers", props.item.id)); //supprime l'item du panier
             Alert.alert(i18n.t('deleteItem'));
         }catch (error) {
             Alert.alert(i18n.t('deleteItemError'));
@@ -129,12 +128,13 @@ const Item = (props) => {
 //----- PAGE PRINCIPALE -----//
 export default function App() {
     const { i18n } = useContext(LangueContext);
+    const { userId } = useContext( UserContext );
     const [totalPrice, setTotalPrice] = useState(0); // initialize total price to 0
     const [displayItems, setItemList] = useState([]); // initialise les items a afficher
 
     //Recupere les items de la base de donnee
     const getItems = async () => {
-        const items = await getDocs(collection(db, "Paniers"))
+        const items = await getDocs(collection(db, "Paniers"), where("idUser", "==", userId)); //recupere les items du panier de l'utilisateur
         const itemsData = items.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
@@ -155,7 +155,7 @@ export default function App() {
     //Permet d'acheter tous les items du panier
     const handleBuyAll = async () => {
         try {
-            const items = query(collection(db, "Paniers"), where("idUser", "==", 1)); //selectionne tous les item de l'utilisateur
+            const items = query(collection(db, "Paniers"), where("idUser", "==", userId)); //selectionne tous les item de l'utilisateur
             const querySnapshot = await getDocs(items);
             const itemData = querySnapshot.docs.map(doc => ({
                 id: doc.id,
@@ -186,7 +186,7 @@ export default function App() {
             <View style={globalStyles.ItemList}>
                 <FlatList
                     data={displayItems}
-                    renderItem={({item}) => <Item item={item} />}
+                    renderItem={({item}) => <Item item={item} userId={userId} />}
                     keyExtractor={item => item.id}
                     refreshing={false}
                     onRefresh={()=>getItems()}

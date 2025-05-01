@@ -4,10 +4,10 @@ import React, { useContext }  from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
-import Header from '../../component/header.js';
-import globalStyles from '../../assets/styles/globalStyles.js';
+import Header from '../component/header.js';
+import globalStyles from '../assets/styles/globalStyles.js';
 
-import { LangueContext } from '../context/langue.jsx';
+import { LangueContext } from './context/langue.jsx';
 
 
 export default function App() {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   content: {
-    flex:1,
+    height: '75%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -71,10 +71,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 20,
     backgroundColor: '#c42116',
-  marginTop: '15%',
+    height: '10%',
   },
   footerText: {
     color: '#fff',
     fontSize: 14,
+    margin:'auto',
   },
 });

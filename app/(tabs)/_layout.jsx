@@ -26,7 +26,7 @@ export default function TabLayout() {
                 }}>
 
                 <Tabs.Screen
-                    name="index"
+                    name="Items"
                     options={{
                         title: i18n.t('Tools'),
                         tabBarIcon: ({ color }) => <AntDesign name="appstore-o" size={24} color="black" />,

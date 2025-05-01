@@ -3,7 +3,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { app } from '../firebaseConfig';
-import { useNavigation } from '@react-navigation/native';
 
 export const UserContext = createContext();
 
@@ -20,7 +19,6 @@ export const UserProvider = ({ children }) => {
             setUserName(userDocSnap.data().username);
         } else {
             setUserId(""); 
-            useNavigation().navigate('Login');
         }
     }  
 

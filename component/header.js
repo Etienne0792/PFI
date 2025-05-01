@@ -27,7 +27,7 @@ const Header = (props) => {
     //permet de deconnecter l'utilisateur
     const deconnexion = () => {
         setUserId('');
-        router.replace('/Panier') // <-- permet de rediriger vers login meme depuis details qui n'est pas dans (tabs)
+        router.replace('/') // <-- permet de rediriger vers login meme depuis details qui n'est pas dans (tabs)
         console.log("Deconnexion de l'utilisateur: " + userId);
     };
 

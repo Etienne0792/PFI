@@ -21,6 +21,7 @@ import db from './firebaseConfig';
 import Header from '../component/header.js';
 
 import { LangueContext } from './context/langue.jsx';
+import { UserContext } from './context/user.jsx';
 
 
 
@@ -36,6 +37,7 @@ const ItemPic = (props) => (
 const Item = (props) => {
     //Translation
     const { i18n } = useContext(LangueContext);
+    const { userId } = useContext(UserContext);
 
     //definit la quantite a ajouter au panier
     const [quantity, setQuantity] = useState(1);
@@ -45,7 +47,7 @@ const Item = (props) => {
     const addToCart = async () => {
         try {
             await addDoc(collection(db, "Paniers"), {
-                idUser: 1,
+                idUser: userId,
                 idItem: props.id,
                 nom: props.nom,
                 uriPic: props.uriPic,
@@ -232,7 +234,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     loadingText:{
-        fontSize: 75,
+        fontSize: 50,
         color: 'white',
         textShadowColor: 'black',
         textShadowOffset: { width: 2, height: 2 },
