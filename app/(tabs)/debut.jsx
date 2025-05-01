@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   content: {
-    flex:0.88,
+    flex:1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 20,
     backgroundColor: '#c42116',
+  marginTop: '15%',
   },
   footerText: {
     color: '#fff',
